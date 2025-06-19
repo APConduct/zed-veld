@@ -1,5 +1,5 @@
-id = "github.apconduct.veld"
-name = "Veld"
+id = "zed-veld"
+name = "Veld Language Support"
 version = "0.1.0"
 schema_version = 1
 authors = ["Perry <aidanpj18@gmail.com>"]

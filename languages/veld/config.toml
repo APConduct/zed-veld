@@ -1,0 +1,23 @@
+name = "Veld"
+tree_sitter_grammar = "tree-sitter-veld"
+tree_sitter_grammar_repo = "https://github.com/APConduct/tree-sitter-veld"
+
+[indent]
+tab_size = 4
+unit = "    "
+
+[brackets]
+pairs = [
+    { start = "{", end = "}" },
+    { start = "[", end = "]" },
+    { start = "(", end = ")" },
+]
+
+[code_actions]
+surrounding_pairs = [
+    { start = "{", end = "}" },
+    { start = "[", end = "]" },
+    { start = "(", end = ")" },
+    { start = "\"", end = "\"" },
+    { start = "'", end = "'" },
+]

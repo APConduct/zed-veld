@@ -1,0 +1,6 @@
+name = "Veld"
+grammar = "veld"
+path_suffixes = ["veld"]
+line_comments = ["# "]
+scope = "source.veld"
+language_server = { name = "none" }

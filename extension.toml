@@ -8,4 +8,4 @@ repository = "https://github.com/APConduct/zed-veld"
 
 [grammars.veld]
 repository = "https://github.com/APConduct/tree-sitter-veld"
-commit = "d18c98a"
+commit = "93b7195"

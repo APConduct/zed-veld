@@ -2,8 +2,6 @@ name = "Veld"
 grammar = "veld"
 path_suffixes = ["veld"]
 line_comments = ["# "]
-tree_sitter_grammar = "tree-sitter-veld"
-tree_sitter_grammar_repo = "https://github.com/APConduct/tree-sitter-veld"
 
 [indent]
 tab_size = 4

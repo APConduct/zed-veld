@@ -1,5 +1,5 @@
 name = "Veld"
-grammar = "veld"
+grammar = "tree-sitter-veld"
 path_suffixes = ["veld"]
 line_comments = ["# "]
 scope = "source.veld"

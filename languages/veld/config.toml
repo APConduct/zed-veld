@@ -7,18 +7,18 @@ line_comments = ["# "]
 tab_size = 4
 unit = "    "
 
-[brackets]
-pairs = [
-    { start = "{", end = "}" },
-    { start = "[", end = "]" },
-    { start = "(", end = ")" },
-]
+# [brackets]
+# pairs = [
+#     { start = "{", end = "}" },
+#     { start = "[", end = "]" },
+#     { start = "(", end = ")" },
+# ]
 
-[code_actions]
-surrounding_pairs = [
-    { start = "{", end = "}" },
-    { start = "[", end = "]" },
-    { start = "(", end = ")" },
-    { start = "\"", end = "\"" },
-    { start = "'", end = "'" },
-]
+# [code_actions]
+# surrounding_pairs = [
+#     { start = "{", end = "}" },
+#     { start = "[", end = "]" },
+#     { start = "(", end = ")" },
+#     { start = "\"", end = "\"" },
+#     { start = "'", end = "'" },
+# ]

@@ -1,0 +1,14 @@
+struct Point
+    X: 64，
+    y: 64，
+end
+
+struct Point(x: f64, y: f64)
+
+kind Shape
+    fn area(self) # No default implementation
+end
+
+kind Shape
+    fn area (self) -> f64
+end

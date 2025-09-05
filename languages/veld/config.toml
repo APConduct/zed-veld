@@ -1,17 +1,28 @@
 name = "Veld"
 grammar = "veld"
 path_suffixes = ["veld"]
-line_comments = ["# "]
+line_comments = ["# ", "#|"]
+block_comment = ["#[[", "]]"]
 
 [indent]
 tab_size = 4
 unit = "    "
 
-# [brackets]
-# pairs = [
-#     { start = "{", end = "}" },
-#     { start = "[", end = "]" },
-#     { start = "(", end = ")" },
+# brackets = [
+#     { start = "{", end = "}", close = "true", newline = true },
+#     { start = "[", end = "]", close = "true", newline = true },
+#     { start = "(", end = ")", close = "true", newline = false },
+#     { start = "\"", end = "\"", close = "true", newline = false, not_in = [
+#         "string",
+#     ] },
+#     { start = "'", end = "'", close = "true", newline = false, not_in = [
+#         "string",
+#         "comment",
+#     ] },
+#     { start = "#[[", end = "]]", close = "true", newline = false, not_in = [
+#         "string",
+#         "comment",
+#     ] },
 # ]
 
 # [code_actions]

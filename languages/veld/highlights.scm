@@ -8,8 +8,8 @@
 (string_literal) @string
 (number_literal) @number
 (boolean_literal) @boolean
-; (char_literal) @character
-(unit_literal) @constant
+(char_literal) @string
+; (unit_literal) @constant
 
 ; Types
 (basic_type) @type
@@ -95,10 +95,27 @@
 "match" @keyword
 "where" @keyword
 "return" @keyword
+"or" @keyword
+"and" @keyword
+"not" @keyword
 
 ; Pattern matching for problematic keywords in identifiers
 ((identifier) @keyword
  (#match? @keyword "^(break|continue|macro)$"))
+
+(enum_variant) @variant
+
+; (assignment
+;     (identifier) @variable
+;     "="
+;     (function_call
+;         (identifier) @function))
+
+; (expression
+;     (function_call
+;         (identifier) @function))
+
+; "self" @variable.special
 
 ; Operators
 "=" @operator
@@ -124,6 +141,7 @@
 "<-" @operator
 "@" @operator
 "~" @operator
+"!" @operator
 
 ; Punctuation
 "(" @punctuation.delimiter

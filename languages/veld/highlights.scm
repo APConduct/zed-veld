@@ -2,6 +2,8 @@
 (comment) @comment
 (multiline_comment) @comment
 
+
+
 ; Literals
 (string_literal) @string
 (number_literal) @number
@@ -15,11 +17,27 @@
 (array_type) @type
 (tuple_type) @type
 
+; Capital identifier is a type
+((identifier) @type
+ (#match? @type "^[A-Z]"))
+
 ; Identifiers in specific contexts
 (function_declaration
   (identifier) @function)
+
+(function_call
+  (identifier) @function)
+(method_call
+  (identifier) @function)
+(kind_method
+  (identifier) @function)
+(struct_method
+  (identifier) @function)
 (proc_declaration
   (identifier) @function)
+(impl_method
+  (identifier) @function)
+
 (struct_declaration
   (identifier) @type)
 (kind_declaration

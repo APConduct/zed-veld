@@ -1,11 +1,11 @@
 id = "veld"
 name = "Veld"
 description = "Veld language support for Zed"
-version = "0.1.3"
+version = "0.1.4"
 schema_version = 1
 authors = ["Perry <aidanpj18@gmail.com>"]
 repository = "https://github.com/APConduct/zed-veld"
 
 [grammars.veld]
 repository = "https://github.com/APConduct/tree-sitter-veld"
-rev = "0cee617ca61b6929197407ec593969c9361ec60c"
+rev = "a7b2b2d459f5772c3e9045a0362c6825af944840"

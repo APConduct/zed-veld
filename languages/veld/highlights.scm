@@ -7,7 +7,7 @@
 (number_literal) @number
 (boolean_literal) @boolean
 ; (char_literal) @character
-(unit_literal) @constant
+; (unit_literal) @constant
 
 ; Types
 (basic_type) @type
@@ -32,6 +32,12 @@
   (identifier) @parameter)
 ; (module_declaration
 ;   (identifier) @namespace)
+
+(function_call
+    (identifier) @function)
+
+(expression
+    (identifier) @variable)
 
 ; Fields
 (struct_field
@@ -81,7 +87,11 @@
 
 ; Pattern matching for problematic keywords in identifiers
 ((identifier) @keyword
- (#match? @keyword "^(break|continue|macro)$"))
+ (#match? @keyword "^(break|continue|macro|while|for|in|mod|import|as|match|where)$"))
+
+"true" @constant
+"false" @constant
+
 
 ; Operators
 "=" @operator

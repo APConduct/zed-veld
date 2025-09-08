@@ -15,6 +15,9 @@
 ; (array_type) @type
 ; (tuple_type) @type
 
+(primary_expression
+  (identifier) @variable)
+
 ; Identifiers in specific contexts
 (function_declaration
   (identifier) @function)
@@ -30,59 +33,112 @@
   (identifier) @variable)
 (parameter
   (identifier) @parameter)
-; (module_declaration
-;   (identifier) @namespace)
-
-(function_call
+(kind_method
     (identifier) @function)
 
-(expression
-    (identifier) @variable)
+; Lambda parameters - direct identifiers in tuple literals
+(lambda
+  params: (tuple_literal
+    (identifier) @parameter))
+
+; Lambda parameters - wrapped identifiers in tuple literals
+(lambda
+  params: (tuple_literal
+    (expression
+      (postfix_expression
+        (primary_expression
+          (identifier) @parameter)))))
+
+; Lambda parameters - single identifier
+(lambda
+  params: (identifier) @parameter)
+
+; Function calls - capture the function name identifier
+(function_call
+  function: (postfix_expression
+    (primary_expression
+      (identifier) @function.call)))
+
+; Member access function calls (override property highlighting)
+(function_call
+  function: (postfix_expression
+    (member_access
+      member: (identifier) @function.call)))
+
+; Member access for property access in specific contexts (not function calls)
+; Property access in variable declarations
+(variable_declaration
+  value: (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+; Property access in expression statements (standalone)
+(expression_statement
+  (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+; Property access in binary expressions
+(binary_expression
+  (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+; Property access in function call arguments
+(arguments
+  (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+; Property access in if conditions
+(if_expression
+  condition: (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+; Property access in return statements
+(return_statement
+  value: (expression
+    (postfix_expression
+      (member_access
+        member: (identifier) @property))))
+
+
+
+
+; Member access for object names
+(member_access
+  object: (postfix_expression
+    (primary_expression
+      (identifier) @variable)))
 
 ; Fields
 (struct_field
   (identifier) @property)
-; (struct_field_initializer
-;   (identifier) @property)
-; (member_expression
-;   (identifier) @property)
 
-; Statement nodes that represent keywords
-; (break_statement) @keyword
-; (continue_statement) @keyword
-; (return_statement) @keyword
-; Macro-related keywords
-; To change the behavior of these keywords, change '@keyword.macro' to '@function.macro' or similar
+; Enum variants
+(enum_variant
+  (identifier) @type)
 
-; (macro_declaration) @keyword.macro
-; (macro_expression) @keyword.macro
-; (macro_invocation) @keyword.macro
 
 ; Safe keywords (excluding the problematic ones)
 "fn" @keyword
 "proc" @keyword
 "let" @keyword
-; "var" @keyword
-; "const" @keyword
-; "mut" @keyword
 "struct" @keyword
 "kind" @keyword
-; "impl" @keyword
 "end" @keyword
 "if" @keyword
 "else" @keyword
 "then" @keyword
-; "while" @keyword
-; "for" @keyword
-; "in" @keyword
 "do" @keyword
-; "mod" @keyword
-; "import" @keyword
 "pub" @keyword
-; "as" @keyword
 "enum" @keyword
-; "match" @keyword
-; "where" @keyword
 "return" @keyword
 
 ; Pattern matching for problematic keywords in identifiers
@@ -129,3 +185,9 @@
 "." @punctuation.delimiter
 ":" @punctuation.delimiter
 ; ";" @punctuation.delimiter
+
+; Additional highlighting for lambda arrows
+"=>" @operator.lambda
+
+; Special highlighting for return type arrows
+; "->" @operator.type

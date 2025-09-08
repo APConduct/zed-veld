@@ -1,0 +1,1 @@
+let multi_param_lambda = (x, y) => x + y + 20

@@ -12,7 +12,8 @@
 ; Types
 (basic_type) @type
 (function_type) @type
-; (array_type) @type
+(array_type) @type
+(generic_type) @type
 ; (tuple_type) @type
 
 (primary_expression
@@ -20,21 +21,35 @@
 
 ; Identifiers in specific contexts
 (function_declaration
-  (identifier) @function)
+  name: (identifier) @function)
 (proc_declaration
-  (identifier) @function)
+  name: (identifier) @function)
 (struct_declaration
-  (identifier) @type)
+  name: (identifier) @type)
 (kind_declaration
-  (identifier) @type)
+  name: (identifier) @type)
 (enum_declaration
-  (identifier) @type)
+  name: (identifier) @type)
 (variable_declaration
-  (identifier) @variable)
+  name: (identifier) @variable)
 (parameter
-  (identifier) @parameter)
+  name: (identifier) @parameter)
 (kind_method
-    (identifier) @function)
+  name: (identifier) @function)
+(impl_function
+  name: (identifier) @function)
+(impl_proc
+  name: (identifier) @function)
+
+; Match expressions and patterns
+"match" @keyword
+(wildcard_pattern) @variable.builtin
+(constructor_pattern
+  constructor: (qualified_identifier) @constructor)
+(identifier_pattern
+  (identifier) @variable)
+
+; Impl blocks
 
 ; Lambda parameters - direct identifiers in tuple literals
 (lambda
@@ -64,6 +79,34 @@
   function: (postfix_expression
     (member_access
       member: (identifier) @function.call)))
+
+; Nested function calls in member access
+(function_call
+  arguments: (arguments
+    (expression
+      (postfix_expression
+        (function_call
+          function: (postfix_expression
+            (primary_expression
+              (identifier) @function.call)))))))
+
+; Function calls in match expressions
+(match_arm
+  body: (expression
+    (postfix_expression
+      (function_call
+        function: (postfix_expression
+          (member_access
+            member: (identifier) @function.call))))))
+
+; Function calls in arguments to other function calls
+(arguments
+  (expression
+    (postfix_expression
+      (function_call
+        function: (postfix_expression
+          (primary_expression
+            (identifier) @function.call))))))
 
 ; Member access for property access in specific contexts (not function calls)
 ; Property access in variable declarations
@@ -140,10 +183,16 @@
 "pub" @keyword
 "enum" @keyword
 "return" @keyword
+"impl" @keyword
+"self" @variable.builtin
 
 ; Pattern matching for problematic keywords in identifiers
 ((identifier) @keyword
  (#match? @keyword "^(break|continue|macro|while|for|in|mod|import|as|match|where)$"))
+
+; identifier is type if it starts with a capital letter
+((identifier) @type
+    (#match? @type "^[A-Z]"))
 
 "true" @constant
 "false" @constant
@@ -179,8 +228,8 @@
 ")" @punctuation.delimiter
 ; "{" @punctuation.delimiter
 ; "}" @punctuation.delimiter
-; "[" @punctuation.delimiter
-; "]" @punctuation.delimiter
+"[" @punctuation.delimiter
+"]" @punctuation.delimiter
 "," @punctuation.delimiter
 "." @punctuation.delimiter
 ":" @punctuation.delimiter

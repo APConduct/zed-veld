@@ -1,0 +1,24 @@
+let result1 = no_params()
+let result2 = another_empty()
+
+let result3 = single_param(42)
+let result4 = with_string("hello")
+
+let result5 = two_params(1, 2)
+let result6 = three_params("a", 42, true)
+
+let result7 = outer_func(inner_func(123))
+let result8 = complex_nested(first_inner(1), second_inner("test"))
+
+let result10 = with_variables(some_var, another_var)
+
+if condition_func() then
+    action_func(value)
+end
+
+return final_func(result)
+
+obj.method_call()
+obj.method_with_args(1, 2, 3)
+
+higher_order(callback_func(data), other_func())

@@ -42,8 +42,24 @@
   name: (identifier) @function)
 
 ; Generic type parameters
-(generic_parameters
+(generic_parameter
   (identifier) @type.parameter)
+
+; Generic parameters with names
+(generic_parameter
+  name: (identifier) @type.parameter)
+
+; Trait bounds in constraints
+(trait_bound
+  (identifier) @type)
+
+; Trait bounds with trait field
+(trait_bound
+  trait: (identifier) @type)
+
+; Associated type names
+(associated_type
+  name: (identifier) @type.parameter)
 
 ; Match expressions and patterns
 "match" @keyword
@@ -168,6 +184,51 @@
   object: (postfix_expression
     (primary_expression
       (identifier) @variable)))
+
+; ; General member access highlighting for nested chains
+; (member_access
+;   member: (identifier) @property)
+
+; ; Member access in nested chains (object side)
+; (member_access
+;   object: (postfix_expression
+;     (member_access
+;       member: (identifier) @property)))
+
+; ; Function calls in chained member access
+; (member_access
+;   object: (postfix_expression
+;     (function_call
+;       function: (postfix_expression
+;         (member_access
+;           member: (identifier) @function.call)))))
+
+; ; Deeply nested function calls in chains
+; (function_call
+;   function: (postfix_expression
+;     (member_access
+;       object: (postfix_expression
+;         (function_call
+;           function: (postfix_expression
+;             (member_access
+;               member: (identifier) @function.call))))
+;       member: (identifier) @function.call)))
+
+; ; Triple nested function calls
+; (function_call
+;   function: (postfix_expression
+;     (member_access
+;       object: (postfix_expression
+;         (function_call
+;           function: (postfix_expression
+;             (member_access
+;               object: (postfix_expression
+;                 (function_call
+;                   function: (postfix_expression
+;                     (member_access
+;                       member: (identifier) @function.call))))
+;               member: (identifier) @function.call))))
+;       member: (identifier) @function.call)))
 
 ; Fields
 (struct_field

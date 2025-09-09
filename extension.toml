@@ -8,4 +8,4 @@ repository = "https://github.com/APConduct/zed-veld"
 
 [grammars.veld]
 repository = "https://github.com/APConduct/tree-sitter-veld"
-rev = "d387f0a562212fa19f9381d1e9e747ee9b4f75ce"
+rev = "d7d7646ca27a47de04e2c8c74d37f2fd0babceed"

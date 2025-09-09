@@ -88,10 +88,11 @@
 (lambda
   params: (identifier) @variable)
 
-; fn_block_lambda parameters
-(fn_block_lambda
-  params: (fn_lambda_param
-    name: (identifier) @variable))
+(fn_lambda_param
+  name: (identifier) @variable)
+
+(fn_lambda_param
+  (identifier) @variable)
 
 ; Function calls - capture the function name identifier
 (function_call
@@ -209,6 +210,23 @@
 (enum_variant
   (identifier) @type)
 
+(record_field
+    (identifier) @property)
+
+(plex_type_field
+    (identifier) @property)
+
+(import_statement
+    name: (identifier) @property)
+
+(import_statement
+    alias: (identifier) @property)
+
+(import_list
+    name: (identifier) @property)
+
+(import_list
+    alias: (identifier) @property)
 
 ; Safe keywords (excluding the problematic ones)
 "fn" @keyword
@@ -228,10 +246,12 @@
 "self" @variable.builtin
 "and" @keyword
 "or" @keyword
+"import" @keyword
+"as" @keyword
 
 ; Pattern matching for problematic keywords in identifiers
 ((identifier) @keyword
- (#match? @keyword "^(break|continue|macro|while|for|in|mod|import|as|match|where)$"))
+ (#match? @keyword "^(break|continue|macro|while|for|in|mod|match|where|plex)$"))
 
 ; identifier is type if it starts with a capital letter
 ((identifier) @type

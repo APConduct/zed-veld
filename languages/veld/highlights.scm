@@ -228,6 +228,9 @@
 (import_list
     alias: (identifier) @property)
 
+(module_declaration
+    name: (identifier) @property)
+
 ; Safe keywords (excluding the problematic ones)
 "fn" @keyword
 "proc" @keyword
@@ -248,10 +251,11 @@
 "or" @keyword
 "import" @keyword
 "as" @keyword
+"mod" @keyword
 
 ; Pattern matching for problematic keywords in identifiers
 ((identifier) @keyword
- (#match? @keyword "^(break|continue|macro|while|for|in|mod|match|where|plex)$"))
+ (#match? @keyword "^(break|continue|macro|while|for|in|match|where|plex)$"))
 
 ; identifier is type if it starts with a capital letter
 ((identifier) @type

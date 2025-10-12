@@ -1,5 +1,5 @@
 struct Point
-    X: f64,
+    x : f64,
     y: f64,
 end
 
